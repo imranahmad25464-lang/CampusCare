@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCare | Register</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" class="logo">
+            <span class="logo-icon">🎓</span>
+
+            <span>
+                Campus<span class="blue-text">Care</span>
+            </span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('login') }}" class="nav-login">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- REGISTER PAGE -->
+    <main class="register-page">
+
+        <div class="page-heading">
+
+            <span class="section-label">
+                CAMPUSCARE
+            </span>
+
+            <h1>
+                Create Your <span class="blue-text">Account</span>
+            </h1>
+
+            <p>
+                Register as a student to submit and track campus complaints.
+            </p>
+
+        </div>
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- REGISTER CARD -->
+
+        <div class="auth-card">
+
+            <form
+                method="POST"
+                action="{{ url_for('register') }}"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        maxlength="100"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STUDENT ID -->
+
+                <div class="form-group">
+
+                    <label for="student_id">
+                        Student ID <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="student_id"
+                        name="student_id"
+                        placeholder="Enter your student ID"
+                        maxlength="50"
+                        required
+                    >
+
+                    <small>
+                        Use the student ID provided by your college.
+                    </small>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        College Email <span>*</span>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your college email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password <span>*</span>
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                    <small>
+                        Password must contain at least 6 characters.
+                    </small>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password <span>*</span>
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required
+                    >
+
+                    <label for="terms">
+                        I agree to use CampusCare responsibly.
+                    </label>
+
+                </div>
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                    style="width:100%;"
+                >
+                    🚀 Create Account
+                </button>
+
+
+            </form>
+
+
+            <!-- LOGIN LINK -->
+
+            <div style="
+                margin-top:25px;
+                padding-top:20px;
+                border-top:1px solid var(--border);
+                text-align:center;
+            ">
+
+                <p style="
+                    color:var(--muted);
+                    font-size:13px;
+                    margin-bottom:10px;
+                ">
+                    Already have an account?
+                </p>
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="secondary-btn"
+                    style="width:100%;"
+                >
+                    🎓 Student Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    🎓
+                </span>
+
+                <span>
+                    Campus<span class="blue-text">Care</span>
+                </span>
+
+            </div>
+
+            <p>
+                Smart College Complaint Management System
+            </p>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 CampusCare. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

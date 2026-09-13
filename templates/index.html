@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCare | Smart Complaint Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" class="logo">
+            <span class="logo-icon">🎓</span>
+
+            <span>
+                Campus<span class="blue-text">Care</span>
+            </span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}" class="active">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="{{ url_for('login') }}" class="nav-login">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="section-label">
+                SMART COLLEGE COMPLAINT SYSTEM
+            </span>
+
+            <h1>
+                Your Voice.
+                <span class="blue-text">Our Action.</span>
+            </h1>
+
+            <p>
+                CampusCare makes it simple for students to report
+                campus problems, track complaints and stay updated
+                until the issue is resolved.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{{ url_for('register') }}"
+                    class="primary-btn">
+                    🚀 Get Started
+                </a>
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="secondary-btn">
+                    Student Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PREVIEW CARD ================= -->
+
+        <div class="hero-card">
+
+            <div class="hero-card-header">
+
+                <div>
+                    <span class="section-label">
+                        LIVE PREVIEW
+                    </span>
+
+                    <h3>
+                        Complaint Tracking
+                    </h3>
+                </div>
+
+                <span class="hero-status">
+                    ● Active
+                </span>
+
+            </div>
+
+
+            <div class="hero-card-item">
+
+                <span>
+                    Complaint ID
+                </span>
+
+                <strong>
+                    #CC-1024
+                </strong>
+
+            </div>
+
+
+            <div class="hero-card-item">
+
+                <span>
+                    Subject
+                </span>
+
+                <strong>
+                    Classroom Fan Not Working
+                </strong>
+
+            </div>
+
+
+            <div class="hero-card-item">
+
+                <span>
+                    Current Status
+                </span>
+
+                <strong class="blue-text">
+                    In Progress
+                </strong>
+
+            </div>
+
+
+            <div class="hero-card-item">
+
+                <span>
+                    Expected Action
+                </span>
+
+                <strong>
+                    Maintenance Team Assigned
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section
+        class="features-section"
+        id="features">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                WHY CAMPUSCARE
+            </span>
+
+            <h2>
+                Everything You Need
+            </h2>
+
+            <p>
+                A simple and powerful platform for managing
+                college complaints efficiently.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+
+            <!-- FEATURE 1 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Easy Complaint Submission
+                </h3>
+
+                <p>
+                    Submit complaints with category,
+                    subject, class, location, description
+                    and supporting evidence.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 2 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Location Support
+                </h3>
+
+                <p>
+                    Add the exact complaint location
+                    using your device's location feature.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 3 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📷
+                </div>
+
+                <h3>
+                    Photo & Video Evidence
+                </h3>
+
+                <p>
+                    Upload images, videos or capture
+                    evidence directly using the camera.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 4 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Track Complaints
+                </h3>
+
+                <p>
+                    Students can easily check the current
+                    status of every submitted complaint.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 5 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Faster Management
+                </h3>
+
+                <p>
+                    Admins can review complaints and
+                    update their status from one dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 6 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Secure Access
+                </h3>
+
+                <p>
+                    Separate student and administrator
+                    access keeps complaint management organized.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section
+        class="about-section"
+        id="about">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                ABOUT CAMPUSCARE
+            </span>
+
+            <h2>
+                Built for a Better Campus
+            </h2>
+
+            <p>
+                CampusCare connects students and college
+                administration through a transparent
+                complaint management system.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎓
+                </div>
+
+                <h3>
+                    Student Friendly
+                </h3>
+
+                <p>
+                    Students can report problems quickly
+                    without complicated procedures.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🏫
+                </div>
+
+                <h3>
+                    Centralized Management
+                </h3>
+
+                <p>
+                    Administrators can view and manage
+                    all complaints from one place.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Transparent Tracking
+                </h3>
+
+                <p>
+                    Complaint progress remains visible
+                    from submission to resolution.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta-section">
+
+        <div
+            class="feature-card"
+            style="
+                text-align:center;
+                padding:55px 30px;
+            ">
+
+            <span class="section-label">
+                GET STARTED TODAY
+            </span>
+
+            <h2 style="
+                font-size:38px;
+                margin-bottom:15px;
+            ">
+                Make Your Campus Better
+            </h2>
+
+            <p style="
+                color:var(--muted);
+                max-width:600px;
+                margin:0 auto 25px;
+            ">
+                Report campus issues, track progress and
+                help create a better college environment.
+            </p>
+
+            <a
+                href="{{ url_for('register') }}"
+                class="primary-btn">
+
+                🚀 Create Student Account
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    🎓
+                </span>
+
+                <span>
+                    Campus<span class="blue-text">Care</span>
+                </span>
+
+            </div>
+
+            <p>
+                Smart College Complaint Management System
+            </p>
+
+        </div>
+
+
+        <div class="copyright">
+            © 2026 CampusCare. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

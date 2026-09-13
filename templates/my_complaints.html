@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCare | My Complaints</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- ================= STATUS LIGHT UPGRADE ================= -->
+    <style>
+        .status-tracker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 28px;
+            padding: 24px 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .status-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
+            min-width: 110px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .status-step span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b95a7;
+            transition: 0.3s ease;
+        }
+
+        .status-dot {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #151922;
+            border: 2px solid #ef4444;
+            color: #ef4444;
+
+            font-size: 17px;
+            font-weight: 800;
+
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.35);
+            transition: all 0.35s ease;
+        }
+
+        /* ================= GREEN COMPLETED LIGHT ================= */
+
+        .status-step.completed .status-dot {
+            background: rgba(34, 197, 94, 0.12);
+            border-color: #22c55e;
+            color: #22c55e;
+            box-shadow:
+                0 0 8px rgba(34, 197, 94, 0.75),
+                0 0 20px rgba(34, 197, 94, 0.35);
+        }
+
+        .status-step.completed span {
+            color: #22c55e;
+        }
+
+        /* ================= CURRENT BLUE LIGHT ================= */
+
+        .status-step.current .status-dot {
+            background: rgba(22, 131, 255, 0.14);
+            border-color: #1683ff;
+            color: #42a5ff;
+            box-shadow:
+                0 0 8px rgba(22, 131, 255, 0.9),
+                0 0 22px rgba(22, 131, 255, 0.45);
+            animation: currentPulse 1.7s infinite;
+        }
+
+        .status-step.current span {
+            color: #42a5ff;
+        }
+
+        /* ================= RED UPCOMING LIGHT ================= */
+
+        .status-step.upcoming .status-dot {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: #ef4444;
+            color: #ef4444;
+            box-shadow:
+                0 0 7px rgba(239, 68, 68, 0.65),
+                0 0 16px rgba(239, 68, 68, 0.25);
+        }
+
+        .status-step.upcoming span {
+            color: #ef4444;
+        }
+
+        /* ================= STATUS LINES ================= */
+
+        .status-line {
+            height: 3px;
+            flex: 1;
+            max-width: 150px;
+            min-width: 45px;
+
+            background: #ef4444;
+            box-shadow: 0 0 7px rgba(239, 68, 68, 0.45);
+
+            margin: 0 5px;
+            margin-bottom: 27px;
+
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+
+        .status-line.completed-line {
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+        }
+
+        .status-line.current-line {
+            background: linear-gradient(
+                90deg,
+                #22c55e,
+                #1683ff
+            );
+
+            box-shadow:
+                0 0 8px rgba(22, 131, 255, 0.55),
+                0 0 8px rgba(34, 197, 94, 0.4);
+        }
+
+        @keyframes currentPulse {
+            0% {
+                box-shadow:
+                    0 0 7px rgba(22, 131, 255, 0.7),
+                    0 0 15px rgba(22, 131, 255, 0.25);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 12px rgba(22, 131, 255, 1),
+                    0 0 28px rgba(22, 131, 255, 0.55);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 7px rgba(22, 131, 255, 0.7),
+                    0 0 15px rgba(22, 131, 255, 0.25);
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 650px) {
+
+            .status-tracker {
+                padding: 20px 0;
+            }
+
+            .status-step {
+                min-width: 75px;
+            }
+
+            .status-step span {
+                font-size: 11px;
+            }
+
+            .status-dot {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .status-line {
+                min-width: 20px;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="complaints-page">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="{{ url_for('home') }}" class="logo">
+                <span class="logo-icon">✦</span>
+                CampusCare
+            </a>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('dashboard') }}">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('submit_complaint') }}">
+                    Submit Complaint
+                </a>
+
+                <a href="{{ url_for('my_complaints') }}" class="active">
+                    My Complaints
+                </a>
+
+                <a href="{{ url_for('logout') }}" class="nav-logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- ================= FLASH MESSAGES ================= -->
+    <div class="flash-container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="complaints-container">
+
+        <!-- Header -->
+        <section class="complaints-header">
+
+            <div>
+
+                <p class="section-label">
+                    COMPLAINT HISTORY
+                </p>
+
+                <h1>
+                    My Complaints
+                </h1>
+
+                <p>
+                    View and track all the complaints you have submitted.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('submit_complaint') }}"
+               class="btn btn-primary">
+
+                + New Complaint
+
+            </a>
+
+        </section>
+
+
+        <!-- ================= COMPLAINT LIST ================= -->
+
+        {% if complaints %}
+
+            <section class="complaints-list">
+
+                {% for complaint in complaints %}
+
+                    <article class="complaint-card">
+
+                        <!-- Top -->
+                        <div class="complaint-card-top">
+
+                            <div>
+
+                                <span class="complaint-id">
+                                    Complaint #{{ complaint.id }}
+                                </span>
+
+                                <h2>
+                                    {{ complaint.subject }}
+                                </h2>
+
+                            </div>
+
+
+                            <!-- Status -->
+                            <div class="status-badge
+                                {% if complaint.status == 'Pending' %}
+                                    status-pending
+                                {% elif complaint.status == 'In Progress' %}
+                                    status-progress
+                                {% elif complaint.status == 'Resolved' %}
+                                    status-resolved
+                                {% endif %}
+                            ">
+
+                                {% if complaint.status == 'Pending' %}
+
+                                    ⏳
+
+                                {% elif complaint.status == 'In Progress' %}
+
+                                    🔄
+
+                                {% elif complaint.status == 'Resolved' %}
+
+                                    ✓
+
+                                {% endif %}
+
+                                {{ complaint.status }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Details -->
+                        <div class="complaint-details">
+
+                            <div class="detail-item">
+
+                                <span class="detail-label">
+                                    Category
+                                </span>
+
+                                <strong>
+                                    {{ complaint.category }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span class="detail-label">
+                                    Class / Section
+                                </span>
+
+                                <strong>
+                                    {{ complaint.class_section or 'Not provided' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span class="detail-label">
+                                    Location
+                                </span>
+
+                                <strong>
+                                    {{ complaint.location or 'Not provided' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span class="detail-label">
+                                    Submitted
+                                </span>
+
+                                <strong>
+                                    {{ complaint.created_at or 'Not available' }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Description -->
+                        <div class="complaint-description">
+
+                            <span class="detail-label">
+                                Description
+                            </span>
+
+                            <p>
+                                {{ complaint.description }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- Attachment -->
+                        {% if complaint.attachment %}
+
+                            <div class="complaint-attachment">
+
+                                <span class="detail-label">
+                                    Attachment
+                                </span>
+
+                                <a href="{{ url_for('uploaded_file',
+                                                   filename=complaint.attachment) }}"
+                                   target="_blank"
+                                   class="attachment-link">
+
+                                    📎 View Attachment
+
+                                </a>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- ================= STATUS TRACKER ================= -->
+
+                        <div class="status-tracker">
+
+                            <!-- ================= SUBMITTED ================= -->
+
+                            <div class="status-step completed">
+
+                                <div class="status-dot">
+                                    ✓
+                                </div>
+
+                                <span>
+                                    Submitted
+                                </span>
+
+                            </div>
+
+
+                            <!-- ================= CONNECTOR 1 ================= -->
+
+                            <div class="status-line
+                                {% if complaint.status == 'In Progress' %}
+                                    current-line
+                                {% elif complaint.status == 'Resolved' %}
+                                    completed-line
+                                {% endif %}
+                            "></div>
+
+
+                            <!-- ================= IN PROGRESS ================= -->
+
+                            <div class="status-step
+                                {% if complaint.status == 'Pending' %}
+                                    upcoming
+                                {% elif complaint.status == 'In Progress' %}
+                                    current
+                                {% elif complaint.status == 'Resolved' %}
+                                    completed
+                                {% endif %}
+                            ">
+
+                                <div class="status-dot">
+
+                                    {% if complaint.status == 'Resolved' %}
+
+                                        ✓
+
+                                    {% elif complaint.status == 'In Progress' %}
+
+                                        ✓
+
+                                    {% else %}
+
+                                        2
+
+                                    {% endif %}
+
+                                </div>
+
+                                <span>
+                                    In Progress
+                                </span>
+
+                            </div>
+
+
+                            <!-- ================= CONNECTOR 2 ================= -->
+
+                            <div class="status-line
+                                {% if complaint.status == 'Resolved' %}
+                                    completed-line
+                                {% endif %}
+                            "></div>
+
+
+                            <!-- ================= RESOLVED ================= -->
+
+                            <div class="status-step
+                                {% if complaint.status == 'Resolved' %}
+                                    completed
+                                {% else %}
+                                    upcoming
+                                {% endif %}
+                            ">
+
+                                <div class="status-dot">
+
+                                    {% if complaint.status == 'Resolved' %}
+
+                                        ✓
+
+                                    {% else %}
+
+                                        3
+
+                                    {% endif %}
+
+                                </div>
+
+                                <span>
+                                    Resolved
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+        {% else %}
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            <section class="empty-state">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h2>
+                    No Complaints Yet
+                </h2>
+
+                <p>
+                    You haven't submitted any complaints yet.
+                    If you have a campus issue, report it through CampusCare.
+                </p>
+
+                <a href="{{ url_for('submit_complaint') }}"
+                   class="btn btn-primary">
+
+                    Submit Your First Complaint →
+
+                </a>
+
+            </section>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="footer-logo">
+
+                    <span>✦</span>
+
+                    CampusCare
+
+                </div>
+
+                <p>
+                    Smart complaint management for a better campus.
+                </p>
+
+            </div>
+
+            <div class="footer-right">
+                © 2026 CampusCare
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1277 @@
+/* =========================================================
+   CAMPUSCARE - FINAL DARK + BLUE STYLE
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #05070b;
+    color: #f5f7ff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   COLORS
+   ========================================================= */
+
+:root {
+    --blue: #1683ff;
+    --blue-light: #42a5ff;
+    --blue-dark: #0867d6;
+
+    --bg: #05070b;
+    --bg-secondary: #0a0e15;
+    --card: #0d131d;
+    --card-hover: #111a27;
+
+    --border: rgba(255, 255, 255, 0.09);
+
+    --text: #f5f7ff;
+    --muted: #8f9bad;
+
+    --green: #28d17c;
+    --yellow: #ffbd4a;
+    --red: #ff6262;
+}
+
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.blue-text {
+    color: var(--blue);
+}
+
+.section-label {
+    display: inline-block;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.page-heading {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 45px;
+}
+
+.page-heading h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    margin-bottom: 15px;
+}
+
+.page-heading p {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(5, 7, 11, 0.92);
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(22, 131, 255, 0.12);
+    border: 1px solid rgba(22, 131, 255, 0.25);
+    border-radius: 11px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    padding: 10px 15px;
+    border-radius: 9px;
+
+    color: #aeb7c7;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+    background: rgba(22, 131, 255, 0.12);
+}
+
+.nav-login {
+    border: 1px solid rgba(22, 131, 255, 0.35) !important;
+    color: var(--blue-light) !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-btn,
+.secondary-btn,
+.upload-btn,
+.location-btn,
+.attachment-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-radius: 10px;
+    padding: 12px 20px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.primary-btn {
+    border: none;
+    background: linear-gradient(
+        135deg,
+        var(--blue),
+        #0d6fe0
+    );
+    color: white;
+    box-shadow: 0 8px 25px rgba(22, 131, 255, 0.2);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(22, 131, 255, 0.32);
+}
+
+.secondary-btn {
+    border: 1px solid var(--border);
+    background: #0c1119;
+    color: #dce4f2;
+}
+
+.secondary-btn:hover {
+    border-color: rgba(22, 131, 255, 0.4);
+    background: rgba(22, 131, 255, 0.08);
+}
+
+.upload-btn {
+    background: rgba(22, 131, 255, 0.12);
+    border: 1px solid rgba(22, 131, 255, 0.3);
+    color: var(--blue-light);
+}
+
+.upload-btn:hover {
+    background: rgba(22, 131, 255, 0.2);
+}
+
+.location-btn {
+    border: 1px solid rgba(22, 131, 255, 0.3);
+    background: rgba(22, 131, 255, 0.08);
+    color: var(--blue-light);
+}
+
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.hero {
+    min-height: 650px;
+    padding: 90px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(22, 131, 255, 0.12),
+            transparent 35%
+        ),
+        #05070b;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero-content h1 {
+    font-size: clamp(45px, 6vw, 78px);
+    line-height: 1.02;
+    margin-bottom: 25px;
+}
+
+.hero-content p {
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 570px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.hero-card {
+    width: 420px;
+    padding: 25px;
+
+    background: linear-gradient(
+        145deg,
+        #101722,
+        #080c13
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.hero-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.hero-card h3 {
+    font-size: 18px;
+}
+
+.hero-status {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.hero-card-item {
+    padding: 17px;
+    margin-bottom: 12px;
+
+    background: #0b111a;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.hero-card-item span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.hero-card-item strong {
+    display: block;
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.features-section,
+.about-section,
+.cta-section {
+    padding: 90px 7%;
+}
+
+.features-section {
+    background: #070a10;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 28px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: var(--card-hover);
+    border-color: rgba(22, 131, 255, 0.25);
+}
+
+.feature-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+    background: rgba(22, 131, 255, 0.1);
+
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    margin-bottom: 9px;
+}
+
+.feature-card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.login-page,
+.register-page,
+.complaint-page,
+.complaints-page,
+.admin-page {
+    min-height: calc(100vh - 75px);
+    padding: 70px 7%;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: auto;
+}
+
+.auth-card,
+.complaint-form,
+.complaint-card,
+.admin-complaint-card,
+.empty-state {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.auth-card {
+    max-width: 500px;
+    margin: auto;
+    padding: 35px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: #dce4f2;
+}
+
+.form-group label span {
+    color: var(--red);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.status-form select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    background: #080d14;
+    color: white;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    outline: none;
+
+    transition: 0.25s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.status-form select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 7px;
+    color: #707b8d;
+    font-size: 12px;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 55px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    color: #8f9bad;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 20px;
+
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.checkbox-group input {
+    accent-color: var(--blue);
+}
+
+
+/* =========================================================
+   FLASH MESSAGE
+   ========================================================= */
+
+.flash-message {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 13px 17px;
+
+    border-radius: 10px;
+    border: 1px solid var(--border);
+
+    font-size: 14px;
+}
+
+.flash-message.success {
+    background: rgba(40, 209, 124, 0.08);
+    border-color: rgba(40, 209, 124, 0.25);
+    color: #6ff0a9;
+}
+
+.flash-message.error {
+    background: rgba(255, 98, 98, 0.08);
+    border-color: rgba(255, 98, 98, 0.25);
+    color: #ff9292;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard-page {
+    padding: 65px 7%;
+    min-height: calc(100vh - 75px);
+}
+
+.dashboard-header {
+    margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.dashboard-header p {
+    color: var(--muted);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 22px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+    background: rgba(22, 131, 255, 0.1);
+
+    font-size: 21px;
+}
+
+.stat-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat-card h2 {
+    font-size: 28px;
+    margin-top: 2px;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.action-card {
+    padding: 28px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    transition: 0.3s;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(22, 131, 255, 0.3);
+}
+
+
+/* =========================================================
+   COMPLAINT FORM
+   ========================================================= */
+
+.complaint-container,
+.complaints-container,
+.admin-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.complaint-form {
+    padding: 35px;
+}
+
+.location-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+}
+
+.upload-box {
+    padding: 35px;
+    text-align: center;
+
+    background: #080d14;
+    border: 1px dashed rgba(22, 131, 255, 0.3);
+    border-radius: 15px;
+}
+
+.upload-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.upload-box h3 {
+    margin-bottom: 5px;
+}
+
+.upload-box p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.file-name {
+    margin-top: 12px;
+    color: var(--blue-light);
+    font-size: 13px;
+}
+
+.camera-section {
+    margin-top: 25px;
+    padding: 22px;
+
+    background: #080d14;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.camera-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.camera-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.camera-container {
+    margin-top: 20px;
+}
+
+.camera-container video {
+    width: 100%;
+    max-height: 420px;
+
+    background: #000;
+    border-radius: 12px;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.camera-preview {
+    margin-top: 15px;
+}
+
+.camera-preview img {
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+.complaint-notice {
+    display: flex;
+    gap: 14px;
+
+    margin-top: 25px;
+    padding: 17px;
+
+    background: rgba(22, 131, 255, 0.06);
+    border: 1px solid rgba(22, 131, 255, 0.18);
+    border-radius: 12px;
+}
+
+.notice-icon {
+    font-size: 22px;
+}
+
+.complaint-notice p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+
+/* =========================================================
+   MY COMPLAINTS
+   ========================================================= */
+
+.complaints-list,
+.admin-complaints {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.complaint-card,
+.admin-complaint-card {
+    padding: 28px;
+}
+
+.complaint-card-top,
+.admin-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.complaint-id {
+    color: var(--blue-light);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.complaint-card h2,
+.admin-complaint-card h2 {
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    white-space: nowrap;
+
+    padding: 7px 12px;
+
+    border-radius: 50px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.status-badge.pending {
+    color: var(--yellow);
+    background: rgba(255, 189, 74, 0.1);
+}
+
+.status-badge.progress {
+    color: var(--blue-light);
+    background: rgba(22, 131, 255, 0.1);
+}
+
+.status-badge.resolved {
+    color: var(--green);
+    background: rgba(40, 209, 124, 0.1);
+}
+
+.complaint-details,
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+
+    padding: 22px 0;
+}
+
+.detail-item {
+    min-width: 0;
+}
+
+.detail-label {
+    display: block;
+
+    color: #727d8f;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+
+    margin-bottom: 5px;
+}
+
+.detail-item strong {
+    color: #e9eef8;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.complaint-description {
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+}
+
+.complaint-description p {
+    color: #aeb7c7;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+.complaint-attachment {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.attachment-btn {
+    padding: 8px 13px;
+
+    background: rgba(22, 131, 255, 0.1);
+    border: 1px solid rgba(22, 131, 255, 0.25);
+
+    color: var(--blue-light);
+}
+
+
+/* =========================================================
+   STATUS TRACKER
+   ========================================================= */
+
+.status-tracker {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 30px;
+    padding: 0 5%;
+}
+
+.tracker-line {
+    position: absolute;
+
+    left: 12%;
+    right: 12%;
+    top: 19px;
+
+    height: 2px;
+
+    background: #202938;
+}
+
+.tracker-step {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    color: #697486;
+    font-size: 12px;
+}
+
+.tracker-circle {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #101722;
+    border: 1px solid #2a3444;
+
+    font-weight: 700;
+}
+
+.tracker-step.active {
+    color: var(--blue-light);
+}
+
+.tracker-step.active .tracker-circle {
+    background: rgba(22, 131, 255, 0.15);
+    border-color: var(--blue);
+    color: var(--blue-light);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    padding: 70px 30px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.empty-state h2 {
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    max-width: 500px;
+    margin: 0 auto 25px;
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+.student-info-box {
+    margin-top: 22px;
+    padding: 20px;
+
+    background: #080d14;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+}
+
+.student-info-box h3 {
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.student-info-grid {
+    padding-bottom: 0;
+}
+
+.admin-status-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+    margin-top: 22px;
+    padding-top: 22px;
+
+    border-top: 1px solid var(--border);
+}
+
+.admin-status-section p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.status-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-form select {
+    width: 180px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin-top: 50px;
+    padding: 35px 7%;
+
+    background: #030508;
+    border-top: 1px solid var(--border);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-content p {
+    color: #687386;
+    font-size: 13px;
+}
+
+.copyright {
+    margin-top: 22px;
+
+    color: #4f5969;
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 750px;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .complaint-details,
+    .student-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 12px 5%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 65px 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 45px;
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
+    .features-section,
+    .about-section,
+    .cta-section,
+    .login-page,
+    .register-page,
+    .complaint-page,
+    .complaints-page,
+    .admin-page,
+    .dashboard-page {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .features-grid,
+    .quick-actions,
+    .stats-grid,
+    .complaint-details,
+    .student-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-heading h1 {
+        font-size: 34px;
+    }
+
+    .complaint-form,
+    .complaint-card,
+    .admin-complaint-card,
+    .auth-card {
+        padding: 22px;
+    }
+
+    .complaint-card-top,
+    .admin-card-header {
+        flex-direction: column;
+    }
+
+    .location-input {
+        grid-template-columns: 1fr;
+    }
+
+    .camera-heading,
+    .admin-status-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .status-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .status-form select {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .primary-btn,
+    .form-actions .secondary-btn {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .status-tracker {
+        padding: 0;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .nav-links {
+        gap: 3px;
+    }
+
+    .nav-links a {
+        padding: 7px;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+
+    .hero-buttons {
+        width: 100%;
+    }
+
+    .camera-controls {
+        flex-direction: column;
+    }
+
+    .complaint-attachment {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

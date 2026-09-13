@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCare | Submit Complaint</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">🎓</span>
+            <span>Campus<span class="blue-text">Care</span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+            <a href="{{ url_for('submit_complaint') }}" class="active">
+                Submit Complaint
+            </a>
+
+            <a href="{{ url_for('my_complaints') }}">
+                My Complaints
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="nav-login">
+                Logout
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main -->
+    <main class="complaint-page">
+
+        <div class="complaint-container">
+
+            <!-- Heading -->
+            <div class="page-heading">
+
+                <span class="section-label">
+                    REPORT AN ISSUE
+                </span>
+
+                <h1>
+                    Submit a
+                    <span class="blue-text">Complaint</span>
+                </h1>
+
+                <p>
+                    Tell us about the problem and our administration
+                    will review it as soon as possible.
+                </p>
+
+            </div>
+
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- Complaint Form -->
+            <form
+                action="{{ url_for('submit_complaint') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="complaint-form"
+            >
+
+                <!-- Student Class -->
+                <div class="form-group">
+
+                    <label for="student_class">
+                        Class / Section
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="student_class"
+                        name="student_class"
+                        placeholder="Example: B.Tech CSE 2nd Year - Section A"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Category -->
+                <div class="form-group">
+
+                    <label for="category">
+                        Complaint Category
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select complaint category
+                        </option>
+
+                        <option value="Infrastructure">
+                            🏢 Infrastructure
+                        </option>
+
+                        <option value="Electrical">
+                            💡 Electrical
+                        </option>
+
+                        <option value="Cleanliness">
+                            🧹 Cleanliness
+                        </option>
+
+                        <option value="Water">
+                            💧 Water
+                        </option>
+
+                        <option value="Internet">
+                            🌐 Internet / Wi-Fi
+                        </option>
+
+                        <option value="Hostel">
+                            🛏️ Hostel
+                        </option>
+
+                        <option value="Library">
+                            📚 Library
+                        </option>
+
+                        <option value="Classroom">
+                            🏫 Classroom
+                        </option>
+
+                        <option value="Laboratory">
+                            🧪 Laboratory
+                        </option>
+
+                        <option value="Security">
+                            🛡️ Security
+                        </option>
+
+                        <option value="Other">
+                            📌 Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Subject -->
+                <div class="form-group">
+
+                    <label for="subject">
+                        Complaint Subject
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="Example: Fan not working in Room 204"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-group">
+
+                    <label for="description">
+                        Complaint Description
+                        <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        maxlength="2000"
+                        placeholder="Describe the problem in detail..."
+                        required
+                    ></textarea>
+
+                    <small>
+                        Please provide enough details so the issue can be
+                        understood clearly.
+                    </small>
+
+                </div>
+
+
+                <!-- Location -->
+                <div class="form-group">
+
+                    <label for="location">
+                        Complaint Location
+                    </label>
+
+                    <div class="location-input">
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Example: Block A, Room 204"
+                        >
+
+                        <button
+                            type="button"
+                            class="location-btn"
+                            onclick="getLocation()"
+                        >
+                            📍 Use My Location
+                        </button>
+
+                    </div>
+
+                    <small id="location-status">
+                        You can enter the location manually or use your device location.
+                    </small>
+
+                </div>
+
+
+                <!-- Attachment -->
+                <div class="form-group">
+
+                    <label for="attachment">
+                        Attach Evidence
+                    </label>
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+                            📎
+                        </div>
+
+                        <h3>
+                            Upload Image, Video or PDF
+                        </h3>
+
+                        <p>
+                            JPG, JPEG, PNG, GIF, WEBP, MP4, MOV, WEBM or PDF
+                        </p>
+
+                        <label
+                            for="attachment"
+                            class="upload-btn"
+                        >
+                            Choose File
+                        </label>
+
+                        <input
+                            type="file"
+                            id="attachment"
+                            name="attachment"
+                            accept=".jpg,.jpeg,.png,.gif,.webp,.mp4,.mov,.webm,.pdf,image/*,video/*,application/pdf"
+                            capture="environment"
+                        >
+
+                        <div
+                            id="file-name"
+                            class="file-name"
+                        >
+                            No file selected
+                        </div>
+
+                        <small>
+                            Maximum file size: 100 MB
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Camera -->
+                <div class="camera-section">
+
+                    <div class="camera-heading">
+
+                        <div>
+
+                            <h3>
+                                📷 Capture Evidence
+                            </h3>
+
+                            <p>
+                                You can use your device camera to capture
+                                an image of the issue.
+                            </p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="openCamera()"
+                        >
+                            Open Camera
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="camera-container"
+                        class="camera-container"
+                        style="display:none;"
+                    >
+
+                        <video
+                            id="camera-video"
+                            autoplay
+                            playsinline
+                        ></video>
+
+
+                        <div class="camera-controls">
+
+                            <button
+                                type="button"
+                                class="primary-btn"
+                                onclick="capturePhoto()"
+                            >
+                                📸 Capture
+                            </button>
+
+                            <button
+                                type="button"
+                                class="secondary-btn"
+                                onclick="closeCamera()"
+                            >
+                                Close
+                            </button>
+
+                        </div>
+
+
+                        <canvas
+                            id="camera-canvas"
+                            style="display:none;"
+                        ></canvas>
+
+
+                        <div
+                            id="camera-preview"
+                            class="camera-preview"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Notice -->
+                <div class="complaint-notice">
+
+                    <div class="notice-icon">
+                        💡
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Before submitting
+                        </strong>
+
+                        <p>
+                            Please make sure your complaint details,
+                            class, location and attachment are correct.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="secondary-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Submit Complaint
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <span>Campus<span class="blue-text">Care</span></span>
+            </div>
+
+            <p>
+                Smart Complaint Management System for Modern Campuses.
+            </p>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 CampusCare. All Rights Reserved.
+        </div>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
